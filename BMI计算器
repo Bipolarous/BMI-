@@ -1,0 +1,72 @@
+#include <iostream>
+#include<string>
+#include <vector>
+#include <iomanip>
+using namespace std;
+
+struct information
+{
+	string studentnum;
+	string studentname;
+	double height, weight;
+};
+
+class BMI
+{
+public:
+	void getinformation()
+	{
+		cout << "请输入完整学号：";
+		getline(cin, student1.studentnum);
+		cout << "请输入学生姓名：";
+		getline(cin, student1.studentname);
+		cout << "请输入身高（单位cm）：";
+		cin >> student1.height;
+		cout << "请输入体重（单位kg）：";
+		cin >> student1.weight;
+	};
+
+	void printinformation()
+	{
+		//打印学号后四位
+		cout << "学号后四位：";
+		for (int i = 4; i >= 1; i--)
+		{
+			cout << student1.studentnum.at(student1.studentnum.length() - i);
+		}
+		cout << endl;
+
+		//打印姓氏+同学
+		if (student1.studentname.length() <= 6)
+		{
+			cout << student1.studentname.at(0) << student1.studentname.at(1) << "同学" << endl;
+		}
+		else {
+			cout << student1.studentname.at(0) << student1.studentname.at(1)
+				<< student1.studentname.at(3) << student1.studentname.at(4) << "同学" << endl;
+		}
+
+		//计算
+		double HEIGHT = student1.height * 3.28, WEIGHT = student1.weight * 2.2;
+		double BMI = student1.weight * 10000 / (student1.height * student1.height);
+		cout << "身高：" << fixed << setprecision(2) << HEIGHT << "英尺" << endl;
+		cout << "体重：" << fixed << setprecision(2) << WEIGHT << "英镑" << endl;
+		cout << "BMI指数：" << fixed << setprecision(1) << BMI << endl;
+
+		//类型分类
+		if (BMI < 18.5) { cout << "低体重"; }
+		else if (BMI >= 18.5 && BMI < 23.9) { cout << "正常"; }
+		else if (BMI >= 24 && BMI < 27.9) { cout << "超重"; }
+		else if (BMI >= 28) { cout << "肥胖"; }
+	}
+private:
+	    information student1;
+};
+
+int main()
+{
+	BMI studentA;
+	studentA.getinformation();
+	cout << endl;
+	studentA.printinformation();
+}
